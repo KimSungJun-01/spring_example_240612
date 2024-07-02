@@ -7,32 +7,32 @@
  		INSERT INTO `new_user`
  		(
  			`name`
-			, `yyyymmdd`
-			, `introduce`
-			, `email`
-			, `createdAt`
-			, `updatedAt`
+			,`yyyymmdd`
+			,`introduce`
+			,`email`
+			,`createdAt`
+			,`updatedAt`
  		)
  		VALUES
  		(
  			#{name}
  			, #{yyyymmdd}
- 			, #{introduce}
  			, #{email}
+ 			, #{introduce}
  			, NOW()
- 			, NOW()
+ 			, NOW()	
  		)
  	</insert>
  	
  	<select id="selectLatestUser" resultType="com.example.lesson04.domain.User">
  		SELECT
  			`id`
- 			, `name`
-			, `yyyymmdd`
-			, `introduce`
-			, `email`
-			, `createdAt`
-			, `updatedAt`
+ 			,`name`
+			,`yyyymmdd`
+			,`introduce`
+			,`email`
+			,`createdAt`
+			,`updatedAt`
 		FROM
 			`new_user`
 		ORDER BY `id` DESC

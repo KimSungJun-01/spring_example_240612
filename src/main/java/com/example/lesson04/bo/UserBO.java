@@ -12,16 +12,14 @@ public class UserBO {
 	@Autowired
 	private UserMapper userMapper;
 	
-	// input: 파라미터 4개
-	// output: X
-	public void addUser(String name, String yyyymmdd,
-			String email, String introduce) {
-		
+	// input : name, yyyymmdd, email, introduce
+	// output : x
+	public void addUser(String name, String yyyymmdd, String email, String introduce) {
 		userMapper.insertUser(name, yyyymmdd, email, introduce);
 	}
 	
-	// input: X
-	// output: User
+	// input : x
+	// output : User or null
 	public User getLatestUser() {
 		return userMapper.selectLatestUser();
 	}
