@@ -1,6 +1,7 @@
 package com.example.lesson04.bo;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,38 @@ public class StudentBO {
 	// output : Student
 	public Student getStudentById(int id) {
 		return studentMapper.selectStudentById(id);
+	}
+	
+	// update
+	// input : id, dreamJob
+	// output : StudentEntity or null
+	public StudentEntity updateStudentDreamJobById(int id, String dreamJob) {
+		// 기존 데이터 조회 => StudentEntity
+		StudentEntity student = studentRepository.findById(id).orElse(null);
+		
+		// 엔티티의 데이터 값을 변경해놓는다.
+		if (student != null) {
+			student = studentRepository.save(student.toBuilder() // toBuilder는 기존 필드값은 유지하고 일부만 변경
+			.dreamJob(dreamJob)
+			.build());// 꼭 객체에 다시 저장
+			
+		}
+		
+		return student;
+	}
+	
+	// delete
+	// input : id
+	// output : x
+	public void deleteStudentById(int id) {
+		// 방법 1)
+//		StudentEntity student = studentRepository.findById(id).orElse(null);
+//		if (student != null) {
+//			studentRepository.delete(student);
+//		}
+		
+		// 방법 2)
+		Optional<StudentEntity> studentOptioanl = studentRepository.findById(id);
+		studentOptioanl.ifPresent(s -> studentRepository.delete(s));
 	}
 }

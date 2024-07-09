@@ -16,6 +16,7 @@ public class Lesson07Ex01RestController {
 	private StudentBO studentBO;
 	
 	// C : create
+	// http://localhost/lesson07/ex01/create
 	@GetMapping("/create")
 	public StudentEntity create() {
 		String name = "김성준";
@@ -24,5 +25,23 @@ public class Lesson07Ex01RestController {
 		String dreamJob = "개발자";
 		
 		return studentBO.addStudent(name, phoneNumber, email, dreamJob);
+	}
+	
+	// U : update
+	// http://localhost/lesson07/ex01/update
+	@GetMapping("/update")
+	public StudentEntity update() {
+		// id가 7번인 dreamJob 변경(축구선수)
+		return studentBO.updateStudentDreamJobById(7, "축구선수");
+	}
+	
+	// D : delete
+	// http://localhost/lesson07/ex01/delete
+	@GetMapping("/delete")
+	public String delete() {
+		// id = 8인 데이터 삭제
+		studentBO.deleteStudentById(8);
+		
+		return "삭제 성공";
 	}
 }
